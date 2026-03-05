@@ -35,6 +35,7 @@ export const availableTasks = [
   { label: "一键加钟", value: "batchAddHangUpTime" },
   { label: "重置罐子", value: "resetBottles" },
   { label: "一键领取罐子", value: "batchlingguanzi" },
+  { label: "收菜", value: "batchHarvest" },
   { label: "一键爬塔", value: "climbTower" },
   { label: "一键爬怪异塔", value: "climbWeirdTower" },
   { label: "一键答题", value: "batchStudy" },

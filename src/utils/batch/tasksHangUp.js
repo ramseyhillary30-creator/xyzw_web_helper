@@ -186,6 +186,183 @@ export function createTasksHangUp(deps) {
     message.success("批量加钟结束");
   };
 
+  // 新增收菜任务：组合挂机、加钟、重置罐子、领取罐子、功法残卷
+  const batchHarvest = async () => {
+    if (selectedTokens.value.length === 0) return;
+    isRunning.value = true;
+    shouldStop.value = false;
+
+    selectedTokens.value.forEach((id) => {
+      tokenStatus.value[id] = "waiting";
+    });
+
+    const taskPromises = selectedTokens.value.map(async (tokenId) => {
+      if (shouldStop.value) return;
+      tokenStatus.value[tokenId] = "running";
+      const token = tokens.value.find((t) => t.id === tokenId);
+      try {
+        addLog({
+          time: new Date().toLocaleTimeString(),
+          message: `=== 开始收菜: ${token.name} ===`,
+          type: "info",
+        });
+        await ensureConnection(tokenId);
+
+        // 1. 领取挂机奖励
+        try {
+          addLog({
+            time: new Date().toLocaleTimeString(),
+            message: `${token.name} 领取挂机奖励`,
+            type: "info",
+          });
+          await tokenStore.sendMessageWithPromise(
+            tokenId,
+            "system_claimhangupreward",
+            {},
+            5000,
+          );
+        } catch (err) {
+          addLog({
+            time: new Date().toLocaleTimeString(),
+            message: `${token.name} 领取挂机奖励出错: ${err.message}`,
+            type: "warning",
+          });
+        }
+        await new Promise((r) => setTimeout(r, 500));
+
+        // 2. 一键加钟 4次
+        for (let i = 0; i < 4; i++) {
+          if (shouldStop.value) break;
+          try {
+            addLog({
+              time: new Date().toLocaleTimeString(),
+              message: `${token.name} 加钟 ${i + 1}/4`,
+              type: "info",
+            });
+            await tokenStore.sendMessageWithPromise(
+              tokenId,
+              "system_mysharecallback",
+              { isSkipShareCard: true, type: 2 },
+              5000,
+            );
+          } catch (err) {
+            addLog({
+              time: new Date().toLocaleTimeString(),
+              message: `${token.name} 加钟第${i + 1}次失败: ${err.message}`,
+              type: "warning",
+            });
+          }
+          await new Promise((r) => setTimeout(r, 500));
+        }
+
+        // 3. 重置罐子
+        try {
+          addLog({
+            time: new Date().toLocaleTimeString(),
+            message: `${token.name} 重置罐子`,
+            type: "info",
+          });
+          await tokenStore.sendMessageWithPromise(
+            tokenId,
+            "bottlehelper_stop",
+            {},
+            5000,
+          );
+          await new Promise((r) => setTimeout(r, 500));
+          await tokenStore.sendMessageWithPromise(
+            tokenId,
+            "bottlehelper_start",
+            {},
+            5000,
+          );
+        } catch (err) {
+          addLog({
+            time: new Date().toLocaleTimeString(),
+            message: `${token.name} 重置罐子失败: ${err.message}`,
+            type: "warning",
+          });
+        }
+        await new Promise((r) => setTimeout(r, 500));
+
+        // 4. 领取罐子
+        try {
+          addLog({
+            time: new Date().toLocaleTimeString(),
+            message: `${token.name} 领取罐子`,
+            type: "info",
+          });
+          await tokenStore.sendMessageWithPromise(
+            tokenId,
+            "bottlehelper_claim",
+            {},
+            5000,
+          );
+        } catch (err) {
+          addLog({
+            time: new Date().toLocaleTimeString(),
+            message: `${token.name} 领取罐子失败: ${err.message}`,
+            type: "warning",
+          });
+        }
+        await new Promise((r) => setTimeout(r, 500));
+
+        // 5. 领取功法残卷
+        try {
+          addLog({
+            time: new Date().toLocaleTimeString(),
+            message: `${token.name} 领取功法残卷`,
+            type: "info",
+          });
+          const resp = await tokenStore.sendMessageWithPromise(
+            tokenId,
+            "legacy_claimhangup",
+            {},
+            5000,
+          );
+          addLog({
+            time: new Date().toLocaleTimeString(),
+            message: `=== ${token.name} 获得 ${resp.reward?.[0]?.value || 0} 残卷 ===`,
+            type: "success",
+          });
+        } catch (err) {
+          addLog({
+            time: new Date().toLocaleTimeString(),
+            message: `${token.name} 领取功法残卷失败: ${err.message}`,
+            type: "warning",
+          });
+        }
+
+        tokenStatus.value[tokenId] = "completed";
+        addLog({
+          time: new Date().toLocaleTimeString(),
+          message: `=== ${token.name} 收菜完成 ===`,
+          type: "success",
+        });
+      } catch (error) {
+        console.error(error);
+        tokenStatus.value[tokenId] = "failed";
+        addLog({
+          time: new Date().toLocaleTimeString(),
+          message: `${token.name} 收菜失败: ${error.message || "未知错误"}`,
+          type: "error",
+        });
+      } finally {
+        tokenStore.closeWebSocketConnection(tokenId);
+        releaseConnectionSlot();
+        addLog({
+          time: new Date().toLocaleTimeString(),
+          message: `${token.name} 连接已关闭  (队列: ${connectionQueue.active}/${batchSettings.maxActive})`,
+          type: "info",
+        });
+      }
+    });
+
+    await Promise.all(taskPromises);
+    isRunning.value = false;
+    currentRunningTokenId.value = null;
+    message.success("批量收菜结束");
+  };
+
   /**
    * 一键答题
    */
@@ -547,6 +724,7 @@ export function createTasksHangUp(deps) {
   return {
     claimHangUpRewards,
     batchAddHangUpTime,
+    batchHarvest, // 新增收菜复合任务
     batchStudy,
     batchclubsign,
     batchWarGuessCheer,

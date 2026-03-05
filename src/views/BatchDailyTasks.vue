@@ -313,6 +313,13 @@
                 </n-button>
                 <n-button
                   size="small"
+                  @click="batchHarvest"
+                  :disabled="isRunning || selectedTokens.length === 0"
+                >
+                  收菜
+                </n-button>
+                <n-button
+                  size="small"
                   @click="resetBottles"
                   :disabled="isRunning || selectedTokens.length === 0"
                 >
@@ -2908,7 +2915,7 @@ const taskForm = reactive({
 
 // 任务分组定义
 const taskGroupDefinitions = [
-  { name: 'daily', label: '日常', tasks: ['startBatch', 'claimHangUpRewards', 'batchAddHangUpTime', 'resetBottles', 'batchlingguanzi', 'batchclubsign', 'batchStudy', 'batcharenafight', 'batchSmartSendCar', 'batchClaimCars', 'store_purchase', 'collection_claimfreereward', 'batchGenieSweep'] },
+  { name: 'daily', label: '日常', tasks: ['startBatch', 'claimHangUpRewards', 'batchAddHangUpTime', 'batchHarvest', 'resetBottles', 'batchlingguanzi', 'batchclubsign', 'batchStudy', 'batcharenafight', 'batchSmartSendCar', 'batchClaimCars', 'store_purchase', 'collection_claimfreereward', 'batchGenieSweep'] },
   { name: 'dungeon', label: '副本', tasks: ['climbTower', 'batchmengjing', 'skinChallenge', 'batchClaimPeachTasks', 'batchBuyDreamItems'] },
   { name: 'baoku', label: '宝库', tasks: ['batchbaoku13', 'batchbaoku45'] },
   { name: 'weirdTower', label: '怪异塔', tasks: ['climbWeirdTower', 'batchUseItems', 'batchMergeItems', 'batchClaimFreeEnergy'] },
@@ -5062,7 +5069,7 @@ const createTaskDeps = () => ({
 
 // 初始化任务模块
 const tasksHangUp = createTasksHangUp(createTaskDeps());
-const { claimHangUpRewards, batchAddHangUpTime, batchStudy, batchclubsign, batchWarGuessCheer } = tasksHangUp;
+const { claimHangUpRewards, batchAddHangUpTime, batchHarvest, batchStudy, batchclubsign, batchWarGuessCheer } = tasksHangUp;
 
 const tasksBottle = createTasksBottle(createTaskDeps());
 const { resetBottles, batchlingguanzi } = tasksBottle;
