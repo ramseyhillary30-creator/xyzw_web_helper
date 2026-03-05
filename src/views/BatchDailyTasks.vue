@@ -1923,7 +1923,7 @@
               </div>
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">刷新延迟</label>
-                <n-input-number v-model:value="batchSettings.refreshDelay" :min="500" :max="3=8000" :step="100" size="small" style="width: 100px" />
+                <n-input-number v-model:value="batchSettings.refreshDelay" :min="500" :max="8000" :step="100" size="small" style="width: 100px" />
               </div>
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">长延迟</label>
