@@ -1911,7 +1911,7 @@
               </div>
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">操作延迟</label>
-                <n-input-number v-model:value="batchSettings.actionDelay" :min="100" :max="2=7000" :step="100" size="small" style="width: 100px" />
+                <n-input-number v-model:value="batchSettings.actionDelay" :min="100" :max="7000" :step="100" size="small" style="width: 100px" />
               </div>
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">连接关闭延迟</label>
