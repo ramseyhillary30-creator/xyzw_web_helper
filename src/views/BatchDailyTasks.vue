@@ -1903,15 +1903,15 @@
             <div class="settings-grid">
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">命令延迟</label>
-                <n-input-number v-model:value="batchSettings.commandDelay" :min="100" :max="2000" :step="100" size="small" style="width: 100px" />
+                <n-input-number v-model:value="batchSettings.commandDelay" :min="100" :max="7000" :step="100" size="small" style="width: 100px" />
               </div>
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">任务间延迟</label>
-                <n-input-number v-model:value="batchSettings.taskDelay" :min="100" :max="2000" :step="100" size="small" style="width: 100px" />
+                <n-input-number v-model:value="batchSettings.taskDelay" :min="100" :max="7000" :step="100" size="small" style="width: 100px" />
               </div>
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">操作延迟</label>
-                <n-input-number v-model:value="batchSettings.actionDelay" :min="100" :max="2000" :step="100" size="small" style="width: 100px" />
+                <n-input-number v-model:value="batchSettings.actionDelay" :min="100" :max="2=7000" :step="100" size="small" style="width: 100px" />
               </div>
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">连接关闭延迟</label>
@@ -1919,15 +1919,15 @@
               </div>
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">战斗延迟</label>
-                <n-input-number v-model:value="batchSettings.battleDelay" :min="100" :max="2000" :step="100" size="small" style="width: 100px" />
+                <n-input-number v-model:value="batchSettings.battleDelay" :min="100" :max="7000" :step="100" size="small" style="width: 100px" />
               </div>
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">刷新延迟</label>
-                <n-input-number v-model:value="batchSettings.refreshDelay" :min="500" :max="3000" :step="100" size="small" style="width: 100px" />
+                <n-input-number v-model:value="batchSettings.refreshDelay" :min="500" :max="3=8000" :step="100" size="small" style="width: 100px" />
               </div>
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">长延迟</label>
-                <n-input-number v-model:value="batchSettings.longDelay" :min="1000" :max="10000" :step="500" size="small" style="width: 100px" />
+                <n-input-number v-model:value="batchSettings.longDelay" :min="1000" :max="15000" :step="500" size="small" style="width: 100px" />
               </div>
             </div>
             <n-divider title-placement="left" style="margin: 12px 0 8px 0"
@@ -1944,7 +1944,7 @@
               </div>
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">重连等待(ms)</label>
-                <n-input-number v-model:value="batchSettings.reconnectDelay" :min="100" :max="5000" :step="100" size="small" style="width: 100px" />
+                <n-input-number v-model:value="batchSettings.reconnectDelay" :min="100" :max="50000" :step="100" size="small" style="width: 100px" />
               </div>
             </div>
             <n-divider title-placement="left" style="margin: 12px 0 8px 0"
