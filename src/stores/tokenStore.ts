@@ -603,7 +603,7 @@ export const useTokenStore = defineStore("tokens", () => {
       // 等待现有操作完成，最多等待10秒
       let attempts = 0;
       while (connect[lockKey] && attempts < 100) {
-        await new Promise((resolve) => setTimeout(resolve, 100));
+        await new Promise((resolve) => setTimeout(resolve, 300));
         attempts++;
       }
       if (connect[lockKey]) {

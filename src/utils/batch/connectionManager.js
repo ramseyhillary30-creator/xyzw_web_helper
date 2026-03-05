@@ -59,7 +59,7 @@ export function createConnectionManager({ tokenStore, batchSettings, addLog }) {
     while (Date.now() - start < timeout) {
       const status = tokenStore.getWebSocketStatus(tokenId);
       if (status === "connected") return true;
-      await new Promise((r) => setTimeout(r, 500));
+      await new Promise((r) => setTimeout(r, 1000));
     }
     return false;
   };

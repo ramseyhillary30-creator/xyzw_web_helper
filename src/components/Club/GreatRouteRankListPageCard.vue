@@ -1041,7 +1041,7 @@ const handleDuel = async () => {
 
         // 短暂延迟，避免请求过于频繁
         if (i < totalCount - 1) {
-          await new Promise((resolve) => setTimeout(resolve, 500));
+          await new Promise((resolve) => setTimeout(resolve, 1000));
         }
       } else {
         // 单场切磋失败，继续下一场

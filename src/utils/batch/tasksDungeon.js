@@ -64,7 +64,7 @@ export function createTasksDungeon(deps) {
               "bosstower_startboss",
               {},
             );
-            await new Promise((r) => setTimeout(r, 500));
+            await new Promise((r) => setTimeout(r, 1000));
           }
           for (let i = 0; i < 9; i++) {
             if (shouldStop.value) break;
@@ -73,7 +73,7 @@ export function createTasksDungeon(deps) {
               "bosstower_startbox",
               {},
             );
-            await new Promise((r) => setTimeout(r, 500));
+            await new Promise((r) => setTimeout(r, 1000));
           }
         }
         tokenStatus.value[tokenId] = "completed";
@@ -144,7 +144,7 @@ export function createTasksDungeon(deps) {
               "bosstower_startboss",
               {},
             );
-            await new Promise((r) => setTimeout(r, 500));
+            await new Promise((r) => setTimeout(r, 1000));
           }
         }
         tokenStatus.value[tokenId] = "completed";
@@ -216,7 +216,7 @@ export function createTasksDungeon(deps) {
             { battleTeam: mjbattleTeam },
             5000,
           );
-          await new Promise((r) => setTimeout(r, 500));
+          await new Promise((r) => setTimeout(r, 1000));
           tokenStatus.value[tokenId] = "completed";
           addLog({
             time: new Date().toLocaleTimeString(),
@@ -372,7 +372,7 @@ export function createTasksDungeon(deps) {
           } catch (err) {
             failCount++;
           }
-          await new Promise((r) => setTimeout(r, 500));
+          await new Promise((r) => setTimeout(r, 1000));
         }
 
         tokenStatus.value[tokenId] = "completed";

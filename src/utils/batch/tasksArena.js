@@ -493,7 +493,7 @@ export function createTasksArena(deps) {
                          {},
                          3000
                        );
-                       await new Promise((r) => setTimeout(r, 500)); 
+                       await new Promise((r) => setTimeout(r, 1000)); 
                     } catch (err) {
                        addLog({
                           time: new Date().toLocaleTimeString(),

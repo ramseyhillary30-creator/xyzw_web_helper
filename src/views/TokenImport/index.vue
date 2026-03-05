@@ -1267,7 +1267,7 @@ const refreshAllTokens = async () => {
 
           // 添加短暂延迟避免请求过于频繁
           if (i < tokensToRefresh.length - 1) {
-            await new Promise((resolve) => setTimeout(resolve, 500));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
           }
         }
 
@@ -1443,7 +1443,7 @@ const updateAllTokenInfo = async () => {
 
           // 添加短暂延迟，避免服务器压力过大
           if (i < tokenStore.gameTokens.length - 1) {
-            await new Promise((resolve) => setTimeout(resolve, 500));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
           }
         }
 

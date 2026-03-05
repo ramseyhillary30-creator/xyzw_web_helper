@@ -978,7 +978,7 @@ const handleExport1 = async () => {
     }
 
     // 等待DOM更新
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     // 生成canvas并导出
     const canvas = await html2canvas(exportDom.value, {

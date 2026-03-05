@@ -389,7 +389,7 @@ export function createTasksTower(deps) {
               type: "info",
             });
 
-            await new Promise((r) => setTimeout(r, 500));
+            await new Promise((r) => setTimeout(r, 1000));
 
             const evotowerinfo2 = await tokenStore.sendMessageWithPromise(
               tokenId,
@@ -423,7 +423,7 @@ export function createTasksTower(deps) {
                             type: "success",
                          });
                       }).catch(() => {});
-                      await new Promise(r => setTimeout(r, 200)); 
+                      await new Promise(r => setTimeout(r, 700)); 
                     }
                  }
             }
@@ -767,7 +767,7 @@ export function createTasksTower(deps) {
                 if (needStart) {
                     await tokenStore.sendMessageWithPromise(tokenId, "towers_start", { towerType: type }, 5000);
                     // 稍微等待一下
-                    await new Promise(r => setTimeout(r, 500));
+                    await new Promise(r => setTimeout(r, 1000));
                 }
 
                 const fightRes = await tokenStore.sendMessageWithPromise(tokenId, "towers_fight", { towerType: type }, 5000);

@@ -126,7 +126,7 @@ const batchclaimboxpointreward = async () => {
   }
   const tokenId = tokenStore.selectedToken.id;
   await tokenStore.sendMessage(tokenId, "item_batchclaimboxpointreward");
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
   await tokenStore.sendMessage(tokenId, "role_getroleinfo");
   message.success("宝箱积分领取完毕");
 };
@@ -157,7 +157,7 @@ const handleBoxHelper = async () => {
       );
     }
     await tokenStore.sendMessage(tokenId, "item_batchclaimboxpointreward");
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 1000));
     await tokenStore.sendMessage(tokenId, "role_getroleinfo");
     // 更新活动进度
     tokenStore.sendMessage(tokenId, "activity_get");

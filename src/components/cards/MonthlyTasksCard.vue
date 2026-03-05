@@ -234,7 +234,7 @@ const autoTopUpFish = async (need, shouldBe, target) => {
             8000,
           );
           freeUsed++;
-          await new Promise((r) => setTimeout(r, 500));
+          await new Promise((r) => setTimeout(r, 1000));
         } catch {
           break;
         }

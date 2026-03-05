@@ -332,7 +332,7 @@ const claimAllCars = async () => {
         try {
           await claimCar(car.id);
           // 为了避免请求过于频繁，可以添加一个小的延迟
-          await new Promise((resolve) => setTimeout(resolve, 300));
+          await new Promise((resolve) => setTimeout(resolve, 800));
         } catch (error) {
           // 继续收其他车辆，不中断整个过程
         }
@@ -520,7 +520,7 @@ const smartSendCar = async () => {
           if (shouldSendCar(car, refreshTickets)) {
             console.log("✅ 该车辆已符合发车条件，开始发车");
             await sendCar(car.id);
-            await new Promise((resolve) => setTimeout(resolve, 500)); // 发车后延迟
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // 发车后延迟
             continue;
           }
 
@@ -547,7 +547,7 @@ const smartSendCar = async () => {
               // 没有免费刷新且刷新券不足，直接发车
               console.log("🔄 没有免费刷新且刷新券不足，直接发车");
               await sendCar(car.id);
-              await new Promise((resolve) => setTimeout(resolve, 500)); // 发车后延迟
+              await new Promise((resolve) => setTimeout(resolve, 1000)); // 发车后延迟
               continue;
             }
           }
@@ -583,7 +583,7 @@ const smartSendCar = async () => {
             if (shouldSendCar(updatedCar, remainingTickets)) {
               console.log("✅ 刷新后车辆符合发车条件，开始发车");
               await sendCar(updatedCar.id);
-              await new Promise((resolve) => setTimeout(resolve, 500)); // 发车后延迟
+              await new Promise((resolve) => setTimeout(resolve, 1000)); // 发车后延迟
               shouldRefresh = false;
               break;
             } else {
@@ -608,7 +608,7 @@ const smartSendCar = async () => {
                 // 没有免费刷新且刷新券不足，直接发车
                 console.log("🔄 没有免费刷新且刷新券不足，直接发车");
                 await sendCar(updatedCar.id);
-                await new Promise((resolve) => setTimeout(resolve, 500)); // 发车后延迟
+                await new Promise((resolve) => setTimeout(resolve, 1000)); // 发车后延迟
                 shouldRefresh = false;
               }
             }

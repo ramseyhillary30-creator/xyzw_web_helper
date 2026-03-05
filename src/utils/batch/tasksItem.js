@@ -1034,7 +1034,7 @@ export function createTasksItem(deps) {
                          3000
                        );
                        // 稍微延迟，避免请求过快
-                       await new Promise((r) => setTimeout(r, 500)); 
+                       await new Promise((r) => setTimeout(r, 1000)); 
                     } catch (err) {
                        addLog({
                           time: new Date().toLocaleTimeString(),

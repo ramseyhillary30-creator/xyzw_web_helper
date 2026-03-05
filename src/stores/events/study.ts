@@ -112,7 +112,7 @@ export const StudyPlugin = ({
         client?.send('study_claimreward', {
           rewardId: rewardId
         })
-        await new Promise(resolve => setTimeout(resolve, 200))
+        await new Promise(resolve => setTimeout(resolve, 800))
         gameLogger.verbose(`已发送奖励领取请求: rewardId=${rewardId}`)
       } catch (error) {
         gameLogger.error(`发送奖励领取请求失败 (rewardId=${rewardId}):`, error)

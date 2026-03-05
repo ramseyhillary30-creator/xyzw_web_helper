@@ -542,7 +542,7 @@ const startTowerClimb = async () => {
                 // 失败静默，可能是还没达到条件
              });
              // 稍微延时避免请求过快
-             await new Promise(r => setTimeout(r, 200)); 
+             await new Promise(r => setTimeout(r, 700)); 
            }
         }
       }

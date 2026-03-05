@@ -231,7 +231,7 @@ const exportImage = async () => {
   try {
     await nextTick();
     // 等待一点时间确保渲染完成
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 300));
 
     const canvas = await html2canvas(element, {
       useCORS: true,

@@ -1117,7 +1117,7 @@ const handleDuel = async () => {
 
         // 短暂延迟，避免请求过于频繁
         if (i < totalCount - 1) {
-          await new Promise((resolve) => setTimeout(resolve, 500));
+          await new Promise((resolve) => setTimeout(resolve, 1000));
         }
       } else {
         // 单场切磋失败，继续下一场
@@ -1225,7 +1225,7 @@ const exportToImage = async () => {
     exportDom.value.style.overflow = "visible";
 
     // 等待DOM更新
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     // 5. 用html2canvas渲染DOM为Canvas
     const canvas = await html2canvas(exportDom.value, {

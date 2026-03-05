@@ -857,7 +857,7 @@ const claimAllCars = async () => {
       try {
         await claimCar(c);
       } catch (_) {}
-      await new Promise((r) => setTimeout(r, 300));
+      await new Promise((r) => setTimeout(r, 800));
     }
     await fetchCarInfo();
     message.success("一键收车完成");
@@ -948,7 +948,7 @@ const smartSendCar = async () => {
       if (shouldSendCar(car, tickets)) {
         await assignHelperIfNeeded(car);
         await sendCar(car);
-        await new Promise((r) => setTimeout(r, 500));
+        await new Promise((r) => setTimeout(r, 1000));
         continue;
       }
       let shouldRefresh = false;
@@ -958,7 +958,7 @@ const smartSendCar = async () => {
       else {
         await assignHelperIfNeeded(car);
         await sendCar(car);
-        await new Promise((r) => setTimeout(r, 500));
+        await new Promise((r) => setTimeout(r, 1000));
         continue;
       }
       while (shouldRefresh) {
@@ -967,7 +967,7 @@ const smartSendCar = async () => {
         if (shouldSendCar(car, tickets)) {
           await assignHelperIfNeeded(car);
           await sendCar(car);
-          await new Promise((r) => setTimeout(r, 500));
+          await new Promise((r) => setTimeout(r, 1000));
           break;
         }
         const freeNow = Number(car.refreshCount ?? 0) === 0;
@@ -976,7 +976,7 @@ const smartSendCar = async () => {
         else {
           await assignHelperIfNeeded(car);
           await sendCar(car);
-          await new Promise((r) => setTimeout(r, 500));
+          await new Promise((r) => setTimeout(r, 1000));
           break;
         }
       }

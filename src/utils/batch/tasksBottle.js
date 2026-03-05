@@ -67,7 +67,7 @@ export function createTasksBottle(deps) {
           5000,
         );
 
-        await new Promise((r) => setTimeout(r, 500));
+        await new Promise((r) => setTimeout(r, 1000));
 
         addLog({
           time: new Date().toLocaleTimeString(),
@@ -143,7 +143,7 @@ export function createTasksBottle(deps) {
           {},
           5000,
         );
-        await new Promise((r) => setTimeout(r, 500));
+        await new Promise((r) => setTimeout(r, 1000));
         tokenStatus.value[tokenId] = "completed";
         addLog({
           time: new Date().toLocaleTimeString(),

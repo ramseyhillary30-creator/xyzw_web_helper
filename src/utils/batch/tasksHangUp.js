@@ -66,7 +66,7 @@ export function createTasksHangUp(deps) {
           {},
           5000,
         );
-        await new Promise((r) => setTimeout(r, 500));
+        await new Promise((r) => setTimeout(r, 1000));
 
         // 2. Add time 4 times
 for (let i = 0; i < 2; i++) {
@@ -82,7 +82,7 @@ for (let i = 0; i < 2; i++) {
             { isSkipShareCard: true, type: 2 },
             5000,
           );
-          await new Promise((r) => setTimeout(r, 500));
+          await new Promise((r) => setTimeout(r, 1000));
         }
 
         tokenStatus.value[tokenId] = "completed";
@@ -153,7 +153,7 @@ for (let i = 0; i < 2; i++) {
             { isSkipShareCard: true, type: 2 },
             5000,
           );
-          await new Promise((r) => setTimeout(r, 500));
+          await new Promise((r) => setTimeout(r, 1000));
         }
         tokenStatus.value[tokenId] = "completed";
         addLog({
@@ -228,7 +228,7 @@ for (let i = 0; i < 2; i++) {
             type: "warning",
           });
         }
-        await new Promise((r) => setTimeout(r, 500));
+        await new Promise((r) => setTimeout(r, 1000));
 
         // 2. 一键加钟 2次
         for (let i = 0; i < 2; i++) {
@@ -252,7 +252,7 @@ for (let i = 0; i < 2; i++) {
               type: "warning",
             });
           }
-          await new Promise((r) => setTimeout(r, 500));
+          await new Promise((r) => setTimeout(r, 1000));
         }
 
         // 3. 重置罐子
@@ -268,7 +268,7 @@ for (let i = 0; i < 2; i++) {
             {},
             5000,
           );
-          await new Promise((r) => setTimeout(r, 500));
+          await new Promise((r) => setTimeout(r, 1000));
           await tokenStore.sendMessageWithPromise(
             tokenId,
             "bottlehelper_start",
@@ -282,7 +282,7 @@ for (let i = 0; i < 2; i++) {
             type: "warning",
           });
         }
-        await new Promise((r) => setTimeout(r, 500));
+        await new Promise((r) => setTimeout(r, 1000));
 
         // 4. 领取罐子
         try {
@@ -304,7 +304,7 @@ for (let i = 0; i < 2; i++) {
             type: "warning",
           });
         }
-        await new Promise((r) => setTimeout(r, 500));
+        await new Promise((r) => setTimeout(r, 1000));
 
         // 5. 领取功法残卷
         try {
@@ -531,7 +531,7 @@ for (let i = 0; i < 2; i++) {
           {},
           5000,
         );
-        await new Promise((r) => setTimeout(r, 500));
+        await new Promise((r) => setTimeout(r, 1000));
         tokenStatus.value[tokenId] = "completed";
         addLog({
           time: new Date().toLocaleTimeString(),

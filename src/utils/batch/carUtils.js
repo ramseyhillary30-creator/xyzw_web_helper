@@ -314,7 +314,7 @@ export function createCarManager({ tokenStore, connectionManager, batchSettings,
               },
               10000
             );
-            await new Promise((r) => setTimeout(r, 500));
+            await new Promise((r) => setTimeout(r, 1000));
             continue;
           }
 
@@ -352,7 +352,7 @@ export function createCarManager({ tokenStore, connectionManager, batchSettings,
               },
               10000
             );
-            await new Promise((r) => setTimeout(r, 500));
+            await new Promise((r) => setTimeout(r, 1000));
             continue;
           }
 
@@ -410,7 +410,7 @@ export function createCarManager({ tokenStore, connectionManager, batchSettings,
                 },
                 10000
               );
-              await new Promise((r) => setTimeout(r, 500));
+              await new Promise((r) => setTimeout(r, 1000));
               break;
             }
 
@@ -439,7 +439,7 @@ export function createCarManager({ tokenStore, connectionManager, batchSettings,
                 },
                 10000
               );
-              await new Promise((r) => setTimeout(r, 500));
+              await new Promise((r) => setTimeout(r, 1000));
               break;
             }
 
@@ -566,7 +566,7 @@ export function createCarManager({ tokenStore, connectionManager, batchSettings,
                   type: "success",
                 });
 
-                await new Promise((r) => setTimeout(r, 300));
+                await new Promise((r) => setTimeout(r, 800));
               } catch (e) {
                 addLog({
                   time: new Date().toLocaleTimeString(),
@@ -602,7 +602,7 @@ export function createCarManager({ tokenStore, connectionManager, batchSettings,
               type: "warning",
             });
           }
-          await new Promise((r) => setTimeout(r, 300));
+          await new Promise((r) => setTimeout(r, 800));
         }
       }
 

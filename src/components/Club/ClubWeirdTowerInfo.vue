@@ -413,7 +413,7 @@ const handleExport = async () => {
     isExporting.value = true
     await nextTick() // 等待 DOM 更新，取消高度限制
     // 稍微延迟一下，确保渲染完成
-    await new Promise(resolve => setTimeout(resolve, 100))
+    await new Promise(resolve => setTimeout(resolve, 300))
     await exportToImage()
     message.success('导出成功')
   } catch (error) {
