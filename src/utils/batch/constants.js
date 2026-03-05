@@ -138,6 +138,7 @@ export const defaultBatchSettings = {
   tokenListColumns: 2,
   commandDelay: 500,
   taskDelay: 500,
+  connectionCloseDelay: 6000, // 关闭连接后的延迟
   maxActive: 2,
   carMinColor: 4,
   connectionTimeout: 10000,

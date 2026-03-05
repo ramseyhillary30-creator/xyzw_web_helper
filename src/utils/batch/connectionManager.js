@@ -27,10 +27,26 @@ export function createConnectionManager({ tokenStore, batchSettings, addLog }) {
   /**
    * 释放连接槽位
    */
+  // 延迟释放槽位，确保关闭连接后有短暂间隔（例如防止服务器限流）
+  // 现在此值可通过 batchSettings.connectionCloseDelay 指定，默认 6000ms
+  const CLOSE_DELAY_MS =
+    typeof batchSettings.connectionCloseDelay === "number"
+      ? batchSettings.connectionCloseDelay
+      : 6000;
   const releaseConnectionSlot = () => {
-    if (connectionQueue.active > 0) {
-      connectionQueue.active--;
-    }
+    if (connectionQueue.active <= 0) return;
+    // 在延迟后再递减 active，以便后续新的连接至少等待一段时间
+    setTimeout(() => {
+      if (connectionQueue.active > 0) {
+        connectionQueue.active--;
+        addLog &&
+          addLog({
+            time: new Date().toLocaleTimeString(),
+            message: `连接槽位释放 (延迟 ${CLOSE_DELAY_MS / 1000}s)  当前队列: ${connectionQueue.active}/${batchSettings.maxActive}`,
+            type: "info",
+          });
+      }
+    }, CLOSE_DELAY_MS);
   };
 
   /**

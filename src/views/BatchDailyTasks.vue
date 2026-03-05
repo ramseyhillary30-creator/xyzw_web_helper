@@ -1907,6 +1907,10 @@
                 <n-input-number v-model:value="batchSettings.actionDelay" :min="100" :max="2000" :step="100" size="small" style="width: 100px" />
               </div>
               <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
+                <label class="setting-label">连接关闭延迟</label>
+                <n-input-number v-model:value="batchSettings.connectionCloseDelay" :min="0" :max="20000" :step="500" size="small" style="width: 100px" />
+              </div>
+              <div class="setting-item" style="flex-direction: row; justify-content: space-between; align-items: center;">
                 <label class="setting-label">战斗延迟</label>
                 <n-input-number v-model:value="batchSettings.battleDelay" :min="100" :max="2000" :step="100" size="small" style="width: 100px" />
               </div>
@@ -2816,6 +2820,7 @@ const batchSettings = reactive({
   battleDelay: 500,         // 战斗延迟（宝库、竞技场等）
   refreshDelay: 1000,       // 刷新延迟（发车刷新等）
   longDelay: 3000,          // 长延迟（功法赠送等）
+  connectionCloseDelay: 6000, // 连接关闭后等待延迟
   // 其他配置
   maxActive: 2,
   carMinColor: 4,
@@ -4890,10 +4895,28 @@ const waitForConnectionSlot = async () => {
   connectionQueue.active++;
 };
 
+// 关闭连接后等待一定时间再释放槽位，避免立刻开启新的连接
+// 延迟由 batchSettings.connectionCloseDelay 配置，默认为 6000ms
+const getCloseDelay = () =>
+  typeof batchSettings.connectionCloseDelay === "number"
+    ? batchSettings.connectionCloseDelay
+    : 6000;
 const releaseConnectionSlot = () => {
-  if (connectionQueue.active > 0) {
-    connectionQueue.active--;
-  }
+  if (connectionQueue.active <= 0) return;
+  const delay = getCloseDelay();
+  setTimeout(() => {
+    if (connectionQueue.active > 0) {
+      connectionQueue.active--;
+      // 如果可用，添加日志说明槽位释放
+      if (typeof addLog === "function") {
+        addLog({
+          time: new Date().toLocaleTimeString(),
+          message: `连接槽位释放 (延迟 ${delay / 1000}s)  当前队列: ${connectionQueue.active}/${batchSettings.maxActive}`,
+          type: "info",
+        });
+      }
+    }
+  }, delay);
 };
 
 const ensureConnection = async (tokenId, maxRetries = 2) => {
