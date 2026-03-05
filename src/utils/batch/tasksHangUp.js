@@ -69,11 +69,11 @@ export function createTasksHangUp(deps) {
         await new Promise((r) => setTimeout(r, 500));
 
         // 2. Add time 4 times
-        for (let i = 0; i < 4; i++) {
+for (let i = 0; i < 2; i++) {
           if (shouldStop.value) break;
           addLog({
             time: new Date().toLocaleTimeString(),
-            message: `${token.name} 挂机加钟 ${i + 1}/4`,
+            message: `${token.name} 加钟 ${i + 1}/2`,
             type: "info",
           });
           await tokenStore.sendMessageWithPromise(
@@ -230,13 +230,13 @@ export function createTasksHangUp(deps) {
         }
         await new Promise((r) => setTimeout(r, 500));
 
-        // 2. 一键加钟 4次
-        for (let i = 0; i < 4; i++) {
+        // 2. 一键加钟 2次
+        for (let i = 0; i < 2; i++) {
           if (shouldStop.value) break;
           try {
             addLog({
               time: new Date().toLocaleTimeString(),
-              message: `${token.name} 加钟 ${i + 1}/4`,
+              message: `${token.name} 加钟 ${i + 1}/2`,
               type: "info",
             });
             await tokenStore.sendMessageWithPromise(
